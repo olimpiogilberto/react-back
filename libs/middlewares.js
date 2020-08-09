@@ -11,7 +11,7 @@
 // };
 
 module.exports = app => {
-  app.set("port", 3333);
+  app.set("port", 8080);
   app.set("json spaces", 4);
 
   app.use(function(req, res, next) {

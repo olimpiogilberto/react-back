@@ -1,7 +1,7 @@
 {
   "name": "ntask-api",
   "version": "1.0.0",
-  "description": "API de gestão de tarefas",
+  "description": "API de gestão de biblioteca",
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js"

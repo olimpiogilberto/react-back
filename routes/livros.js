@@ -2,12 +2,18 @@ import bodyParser from "body-parser";
 
 module.exports = app => {
     const Livros = app.db.models.Livros;
+    const Autores = app.db.models.Autores;
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.route("/api/livros")
+
     .get((req, res) => {
-      Livros.findAll({})
+      Livros.findAll({ attributes: ["id", "titulo","preco","autorId"]})
+
+      // Autores.findOne({where: req.params, attributes: ["id", "nome", "email"]
+      //   })
+
         .then(result => res.json(result))
         .catch(error => {
           res.status(412).json({msg: error.message});
@@ -26,10 +32,10 @@ module.exports = app => {
 
     app.route("/api/livros/:id")
       .get((req, res) => {
-        Users.findById(req.params.id, {
-            attributes: ["id", "titulo", "autor"]
-        })
-        // Livros.findOne({where: req.params, attributes: ["id", "titulo"]})
+        // Livros.findById(req.params.id, {
+        //     attributes: ["id", "titulo", "autor"]
+        // })
+        Livros.findOne({where: req.params, attributes: ["id", "titulo","autorId"]})
 
           .then(result => res.json(result))
           .catch(error => {

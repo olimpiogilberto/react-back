@@ -2,11 +2,36 @@ import bodyParser from "body-parser";
 
 module.exports = app => {
     const Autores = app.db.models.Autores;
+    // const Livros = app.db.models.Livros;
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.route("/autores")
+    app.route("/api/autores")
     .get((req, res) => {
+     
+      // Livros.findAll({where: req.params, attributes: ["id", "titulo", "preco","updatedAt","createdAt"]})
+      // .then(result => res.json(livrosResul))
+
+      // Autores.findAll({where: req.params, attributes: ["id", "nome", "email","updatedAt","createdAt"]})
+      // .then(result => res.json(autorResul))
+
+      // const autorFull = [
+      //   {
+      //     id: livrosResul.id,
+      //     titulo: livrosResul.titulo,
+      //     preco: livrosResul.preco,
+      //     autor : [
+      //       {
+      //         id: autorResul.id,
+      //         nome: autorResul.nome,
+      //         email: autorResul.email
+      //       }
+      //     ]
+      //   }
+      // ]
+
+      // return res.json(autorFull);
+
       Autores.findAll({where: req.params, attributes: ["id", "nome", "email","updatedAt","createdAt"]})
         .then(result => res.json(result))
         .catch(error => {
@@ -24,11 +49,9 @@ module.exports = app => {
         });
         // "/autores": Cadastra um novo autor
 
-    app.route("/autores/:id")
+    app.route("/api/autores/:id")
       .get((req, res) => {
-        // Autores.findById(req.params.id, {
-        //     attributes: ["id", "name", "email"]
-        // })
+
         Autores.findOne({where: req.params, attributes: ["id", "nome", "email","createdAt","updatedAt"]})
 
           .then(result => res.json(result))
